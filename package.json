@@ -1,0 +1,8 @@
+{
+  "name": "mallu-ai",
+  "version": "2.0.0",
+  "private": true,
+  "dependencies": {
+    "openai": "^6.0.0"
+  }
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mallu AI — Kerala's AI</title>
+<style>
+:root{--green:#0f8f5b;--green2:#16b86f;--deep:#062b1d;--bg:#f4fbf7;--card:rgba(255,255,255,.82);--text:#10251c;--muted:#6b7d74;--border:rgba(15,143,91,.14)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:radial-gradient(circle at 10% 10%,rgba(22,184,111,.16),transparent 28%),radial-gradient(circle at 90% 80%,rgba(15,143,91,.12),transparent 30%),var(--bg);min-height:100vh;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.035;background-image:radial-gradient(#0f8f5b 1px,transparent 1px);background-size:22px 22px}
+.app{min-height:100vh;display:flex}
+.sidebar{width:270px;padding:22px 16px;display:flex;flex-direction:column;border-right:1px solid var(--border);background:rgba(255,255,255,.65);backdrop-filter:blur(18px)}
+.brand{display:flex;align-items:center;gap:11px;padding:8px 10px 24px}.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:white;font-size:22px;background:linear-gradient(135deg,var(--green),#075a3a);box-shadow:0 10px 25px rgba(15,143,91,.25)}
+.brand h1{font-size:20px;letter-spacing:-.5px}.brand span{color:var(--green)}
+.new{border:1px solid var(--border);background:white;color:var(--text);border-radius:13px;padding:12px 14px;font-weight:700;cursor:pointer;transition:.25s;box-shadow:0 5px 18px rgba(10,70,45,.05)}
+.new:hover{transform:translateY(-2px);border-color:rgba(15,143,91,.35)}
+.side-title{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin:28px 10px 10px}
+.history div{padding:10px;border-radius:10px;color:#51665d;font-size:14px;margin:3px 0;cursor:pointer}.history div:hover{background:#eaf7f0;color:var(--green)}
+.footer{margin-top:auto;padding:12px;color:var(--muted);font-size:12px;text-align:center}
+main{flex:1;display:flex;flex-direction:column;min-width:0}
+header{height:70px;padding:0 30px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(255,255,255,.55);backdrop-filter:blur(18px);position:sticky;top:0;z-index:5}
+.status{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:700}.dot{width:9px;height:9px;border-radius:50%;background:#16b86f;box-shadow:0 0 0 5px rgba(22,184,111,.12)}.pill{border:1px solid var(--border);padding:8px 12px;border-radius:999px;background:white;font-size:12px;color:var(--muted)}
+.chat{flex:1;width:min(900px,100%);margin:auto;padding:55px 24px 145px}.hero{text-align:center}.hero .emoji{font-size:45px;margin-bottom:12px}.hero h2{font-size:clamp(32px,5vw,56px);letter-spacing:-2px;line-height:1.05}.hero h2 span{color:var(--green)}.hero p{color:var(--muted);margin:16px auto 35px;max-width:560px;font-size:16px;line-height:1.6}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.card{padding:17px;border:1px solid var(--border);border-radius:17px;background:var(--card);backdrop-filter:blur(12px);cursor:pointer;transition:.3s}.card:hover{transform:translateY(-5px);box-shadow:0 15px 35px rgba(7,91,58,.1);border-color:rgba(15,143,91,.3)}.card b{display:block;font-size:14px;margin-bottom:7px}.card small{color:var(--muted);line-height:1.4}
+.composer-wrap{position:fixed;bottom:0;left:270px;right:0;padding:18px 24px 25px;background:linear-gradient(transparent,rgba(244,251,247,.96) 35%)}.composer{max-width:850px;margin:auto;background:white;border:1px solid rgba(15,143,91,.2);border-radius:20px;padding:8px;display:flex;align-items:center;box-shadow:0 15px 45px rgba(5,69,43,.12)}
+textarea{flex:1;border:0;outline:0;resize:none;font:inherit;padding:11px 13px;min-height:45px;max-height:120px;color:var(--text)}textarea::placeholder{color:#91a29b}.send{width:45px;height:45px;border:0;border-radius:14px;background:linear-gradient(135deg,var(--green2),var(--green));color:white;font-size:19px;cursor:pointer;transition:.25s}.send:hover{transform:scale(1.06);box-shadow:0 8px 20px rgba(15,143,91,.3)}.send:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.message{margin:22px 0;padding:17px 19px;border-radius:18px;line-height:1.6;animation:rise .35s ease;white-space:pre-wrap}.user{margin-left:auto;max-width:75%;background:#e3f6ec;border-bottom-right-radius:5px}.ai{max-width:82%;background:white;border:1px solid var(--border);border-bottom-left-radius:5px}.hidden{display:none}
+.typing{color:var(--muted)}.error{border-color:#efb2b2;background:#fff7f7}
+@keyframes rise{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+@media(max-width:760px){.sidebar{display:none}.composer-wrap{left:0;padding:12px}header{padding:0 16px}.chat{padding:35px 15px 125px}.cards{grid-template-columns:1fr}.hero h2{letter-spacing:-1px}.user,.ai{max-width:92%}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+<div class="brand"><div class="logo">🌴</div><h1>Mallu <span>AI</span></h1></div>
+<button class="new" onclick="newChat()">＋ New chat</button>
+<div class="side-title">Recent chats</div>
+<div class="history">
+<div onclick="fill('Tell me a fun fact about Kerala')">Kerala fun facts</div>
+<div onclick="fill('Write this in Manglish')">Manglish helper</div>
+<div onclick="fill('Give me a Kerala travel plan')">Kerala travel plan</div>
+</div>
+<div class="footer">Made with ❤️ in Kerala<br>മലയാളം • Manglish • English</div>
+</aside>
+<main>
+<header><div class="status"><span class="dot"></span>Mallu AI <span style="font-weight:400;color:var(--muted)">• Online</span></div><div class="pill">Kerala mode 🌿</div></header>
+<section class="chat" id="chat">
+<div class="hero" id="hero">
+<div class="emoji">🌴</div>
+<h2>Namaskaaram,<br><span>entha venam?</span></h2>
+<p>Your modern Kerala AI companion. Ask in Malayalam, Manglish, or English — Mallu AI is ready.</p>
+<div class="cards">
+<div class="card" onclick="fill('Give me a Kerala-style recipe for dinner')"><b>🍛 Kerala recipes</b><small>“Innu entha undakkunne?”</small></div>
+<div class="card" onclick="fill('Teach me some useful Malayalam phrases')"><b>🗣️ Malayalam</b><small>Learn Malayalam & Manglish</small></div>
+<div class="card" onclick="fill('Plan a 3 day trip around Kerala')"><b>🌴 Explore Kerala</b><small>Trips, places & local ideas</small></div>
+</div>
+</div>
+</section>
+<div class="composer-wrap"><div class="composer">
+<textarea id="input" rows="1" placeholder="Ask Mallu AI...  എന്താ ചോദിക്കാനുള്ളത്?"></textarea>
+<button class="send" id="send" onclick="send()">➤</button>
+</div></div>
+</main>
+</div>
+<script>
+const input=document.getElementById('input'),chat=document.getElementById('chat'),hero=document.getElementById('hero'),sendButton=document.getElementById('send');
+let messages=[];
+function fill(text){input.value=text;input.focus();resizeInput()}
+function resizeInput(){input.style.height='auto';input.style.height=Math.min(input.scrollHeight,120)+'px'}
+input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}});
+input.addEventListener('input',resizeInput);
+
+function addMessage(type,text){
+ const el=document.createElement('div');
+ el.className='message '+type;
+ if(type==='ai') el.innerHTML='<b>🌴 Mallu AI</b><br><span></span>';
+ else el.textContent=text;
+ if(type==='ai') el.querySelector('span').textContent=text;
+ chat.appendChild(el); chat.scrollTop=chat.scrollHeight; return el;
+}
+
+async function send(){
+ const text=input.value.trim(); if(!text || sendButton.disabled)return;
+ if(hero)hero.classList.add('hidden');
+ addMessage('user',text);
+ messages.push({role:'user',content:text});
+ input.value='';resizeInput();sendButton.disabled=true;
+ const ai=addMessage('ai','Thinking...');
+
+ try{
+   const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages})});
+   const data=await res.json();
+   if(!res.ok)throw new Error(data.error||'Request failed');
+   ai.querySelector('span').textContent=data.reply;
+   messages.push({role:'assistant',content:data.reply});
+ }catch(err){
+   ai.classList.add('error');
+   ai.querySelector('span').textContent='Sorry da 😕 '+err.message;
+   messages.pop();
+ }finally{
+   sendButton.disabled=false;input.focus();chat.scrollTop=chat.scrollHeight;
+ }
+}
+
+function newChat(){location.reload()}
+</script>
+</body>
+</html>
